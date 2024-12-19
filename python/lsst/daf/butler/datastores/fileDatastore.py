@@ -3029,8 +3029,10 @@ class FileDatastore(GenericBaseDatastore[StoredFileInfo]):
 
     def export_records(self, refs: Iterable[DatasetIdRef]) -> Mapping[str, DatastoreRecordData]:
         # Docstring inherited from the base class.
+        print(f"aaaaaaaaaaaaaaaaaaaa refs: {refs}")
         exported_refs = list(self._bridge.check(refs))
         ids = {ref.id for ref in exported_refs}
+        print(f"aaaaaaaaaaaaaaaaaaaa ids: {ids}")
         records: dict[DatasetId, dict[str, list[StoredDatastoreItemInfo]]] = {id: {} for id in ids}
         print(f"aaaaaaaaaaaaaaaaaaaa1 records: {records}")
         for row in self._table.fetch(dataset_id=ids):
