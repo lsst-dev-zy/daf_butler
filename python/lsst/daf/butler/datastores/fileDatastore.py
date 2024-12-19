@@ -267,10 +267,12 @@ class FileDatastore(GenericBaseDatastore[StoredFileInfo]):
         # derived from the (unexpanded) root
         if "name" in self.config:
             self.name = self.config["name"]
+            print(f"aaaaaaaaaaaaaaaaaaaa name from config:{self.name}")
         else:
             # We use the unexpanded root in the name to indicate that this
             # datastore can be moved without having to update registry.
             self.name = "{}@{}".format(type(self).__name__, self.config["root"])
+            print(f"aaaaaaaaaaaaaaaaaaaa name from construct:{self.name}")
 
         self.locationFactory = LocationFactory(self.root)
 
@@ -3036,6 +3038,8 @@ class FileDatastore(GenericBaseDatastore[StoredFileInfo]):
             dataset_records.setdefault(self._table.name, []).append(info)
 
         record_data = DatastoreRecordData(records=records)
+
+        print(f"aaaaaaaaaaaaaaaaaaaa filestore name:{self.name}, data:{record_data}")
         return {self.name: record_data}
 
     def set_retrieve_dataset_type_method(self, method: Callable[[str], DatasetType | None] | None) -> None:
