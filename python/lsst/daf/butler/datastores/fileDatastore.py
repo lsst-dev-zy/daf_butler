@@ -3032,14 +3032,15 @@ class FileDatastore(GenericBaseDatastore[StoredFileInfo]):
         exported_refs = list(self._bridge.check(refs))
         ids = {ref.id for ref in exported_refs}
         records: dict[DatasetId, dict[str, list[StoredDatastoreItemInfo]]] = {id: {} for id in ids}
+        print(f"aaaaaaaaaaaaaaaaaaaa1 records: {records}")
         for row in self._table.fetch(dataset_id=ids):
             info: StoredDatastoreItemInfo = StoredFileInfo.from_record(row)
             dataset_records = records.setdefault(row["dataset_id"], {})
             dataset_records.setdefault(self._table.name, []).append(info)
 
         record_data = DatastoreRecordData(records=records)
-
-        print(f"aaaaaaaaaaaaaaaaaaaa filestore name:{self.name}, data:{record_data}")
+        print(f"aaaaaaaaaaaaaaaaaaaa2 records: {records}")
+        #print(f"aaaaaaaaaaaaaaaaaaaa filestore name:{self.name}, data:{record_data}")
         return {self.name: record_data}
 
     def set_retrieve_dataset_type_method(self, method: Callable[[str], DatasetType | None] | None) -> None:
