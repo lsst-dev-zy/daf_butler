@@ -302,6 +302,7 @@ class FileDatastore(GenericBaseDatastore[StoredFileInfo]):
             self.cacheManager = DatastoreDisabledCacheManager("", universe=bridgeManager.universe)
 
         self.universe = bridgeManager.universe
+        self._manager = bridgeManager
 
     @classmethod
     def _create_from_config(
